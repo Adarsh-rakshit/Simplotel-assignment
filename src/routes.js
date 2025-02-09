@@ -1,6 +1,7 @@
 import {Router} from "express"
 import {upload} from "./middleware.js"
 import {uploadController, deleteController} from "./controllers/upload.controllers.js"
+import { fetchController } from "./controllers/fetch.controllers.js";
 const router = Router();
 
 //upload Route
