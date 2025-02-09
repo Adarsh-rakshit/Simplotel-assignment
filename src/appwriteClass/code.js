@@ -25,7 +25,28 @@ export class Service {
     }
 
     async getFile(fileId) {
+        if(!fileId){
+            throw new ApiError(500,"internal server error in fileId from getfile appwrite");
+        }
+        // Try to get file from Appwrite
+        const file = await this.bucket.getFile(
+            APPWRITE_CONFIG.BUCKET,
+            fileId
+        );
 
+        // If file exists, return the file data
+        if (file) {
+            // Get file contents as buffer
+            const fileData = await this.bucket.getFileDownload(
+                APPWRITE_CONFIG.BUCKET,
+                fileId
+            );
+
+            return fileData;
+        }
+        else{
+            throw new ApiError(500, "file id given is wrong and it doesnot exists")
+        }
     }
 
     async uploadFile(filepath) {

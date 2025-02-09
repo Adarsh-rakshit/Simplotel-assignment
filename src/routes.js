@@ -8,7 +8,7 @@ const router = Router();
 router.route("/upload").post(upload.single("file"), uploadController);
 
 //fetch file route
-router.route("/files/:fileId").get();
+router.route("/files/:fileId").get(fetchController);
 router.route("/files/:fileId").delete(deleteController);
 
 export {router};
